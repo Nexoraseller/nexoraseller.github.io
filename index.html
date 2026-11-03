@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NEXORA | Premium Tech</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#080d18;color:white;font-family:Arial,sans-serif}
+header{padding:22px 18px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #20314c}
+.logo{font-size:27px;font-weight:900;letter-spacing:3px}
+.blue{color:#168bff}
+nav a{color:white;text-decoration:none;margin-left:12px;font-size:13px}
+.hero{padding:65px 22px;text-align:center;background:radial-gradient(circle at top,#123c70,#080d18 70%)}
+.hero h1{font-size:38px;margin:10px 0}
+.hero p{color:#b3c4dc}
+button{background:#087bff;color:white;border:0;padding:13px 20px;border-radius:9px;font-weight:bold;cursor:pointer}
+h2{text-align:center;margin-top:35px}
+.products{display:grid;grid-template-columns:repeat(2,1fr);gap:13px;padding:15px}
+.product{background:#121d30;padding:14px;border:1px solid #253b59;border-radius:13px}
+.photo{font-size:55px;text-align:center;padding:20px;background:#0b1526;border-radius:9px}
+.product h3{font-size:16px}
+.price{color:#2998ff;font-weight:bold}
+footer{text-align:center;padding:35px;color:#8296b2}
+#basket{padding:18px;background:#111c2e;margin:15px;border-radius:12px}
+</style>
+</head>
+<body>
+<header>
+<div class="logo">NEXORA<span class="blue">.</span></div>
+<nav><a href="#shop">SHOP</a><a href="#basket">BASKET 🛒 <span id="count">0</span></a></nav>
+</header>
+
+<section class="hero">
+<p class="blue">WELCOME TO NEXORA</p>
+<h1>UPGRADE YOUR<br>EVERYDAY.</h1>
+<p>Discover gadgets that make everyday life better.</p>
+<a href="#shop"><button>EXPLORE PRODUCTS →</button></a>
+</section>
+
+<h2 id="shop">FEATURED PRODUCTS</h2>
+<div class="products" id="products"></div>
+
+<div id="basket">
+<h2>YOUR BASKET</h2>
+<div id="items">Your basket is empty.</div>
+<h3 id="total">Total: £0.00</h3>
+<button onclick="checkout()">CHECKOUT</button>
+</div>
+
+<footer>
+<h2>NEXORA<span class="blue">.</span></h2>
+<p>TECH THAT MOVES WITH YOU.</p>
+<p>© 2026 NEXORA</p>
+</footer>
+
+<script>
+const products=[
+{name:"Phone Stand",price:7.99,emoji:"📱"},
+{name:"LED Desk Light",price:9.99,emoji:"💡"},
+{name:"Cable Organiser",price:5.99,emoji:"🔌"},
+{name:"Mini Tech Hub",price:12.99,emoji:"⚡"}
+];
+let basket=[];
+const container=document.getElementById("products");
+products.forEach((p,i)=>{
+container.innerHTML+=`
+<div class="product">
+<div class="photo">${p.emoji}</div>
+<h3>${p.name}</h3>
+<p class="price">£${p.price.toFixed(2)}</p>
+<button onclick="add(${i})">ADD TO BASKET</button>
+</div>`;
+});
+function add(i){basket.push(products[i]);update();}
+function update(){
+document.getElementById("count").textContent=basket.length;
+document.getElementById("items").innerHTML=basket.length?
+basket.map(p=>p.name+" — £"+p.price.toFixed(2)).join("<br>"):
+"Your basket is empty.";
+document.getElementById("total").textContent="Total: £"+basket.reduce((s,p)=>s+p.price,0).toFixed(2);
+}
+function checkout(){
+alert("NEXORA checkout is coming soon!");
+}
+</script>
+</body>
+</html>
